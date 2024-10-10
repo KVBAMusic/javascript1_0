@@ -30,9 +30,26 @@
     }
     info.innerText = "Numer nie może zawierać znaków specjalnych";
   });
+
   //zadanie 2
   const draggable = document.getElementById("ex3_element");
+  const target1 = document.getElementById("ex3_one");
+  const target2 = document.getElementById("ex3_two");
   draggable.addEventListener("dragstart", function (event) {
     event.dataTransfer.setData("text/plain", event.target.id);
+    event.dataTransfer.dropEffect = "move";
+    console.log("działa");
   });
+  const dragoverHandler = (event) => {
+    event.preventDefault();
+  };
+  const dropHandler = (event) => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text/plain");
+    event.target.appendChild(document.getElementById(data));
+  };
+  target1.addEventListener("dragover", dragoverHandler);
+  target1.addEventListener("drop", dropHandler);
+  target2.addEventListener("dragover", dragoverHandler);
+  target2.addEventListener("drop", dropHandler);
 })();

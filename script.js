@@ -13,10 +13,10 @@
   const inp = document.getElementById("ex2_text");
   const info = document.getElementById("ex2_content");
   inp.addEventListener("input", function (event) {
-    let text = inp.innerText;
+    let text =  event.target.value;
     const letter_regex = /[A-Za-z]+/;
-    const special_regex = /(\w|\d)+/;
-    if (text.length !== 9) {
+    const number_regex = /\d{9}/;
+    if (text.length != 9) {
       info.innerText = "Długość numeru musi być równa 9";
       return;
     }
@@ -24,11 +24,15 @@
       info.innerText = "Numer nie może zawierać liter";
       return;
     }
-    if (!special_regex.test(text)) {
-      info.innerText = "Numer nie może zawierać znaków specjalnych";
+    if (number_regex.test(text)) {
+      info.innerText = "Numer jest poprawny";
       return;
     }
-    info.innerText = "Numer jest poprawny";
-
+    info.innerText = "Numer nie może zawierać znaków specjalnych";
+  });
+  //zadanie 2
+  const draggable = document.getElementById("ex3_element");
+  draggable.addEventListener("dragstart", function (event) {
+    event.dataTransfer.setData("text/plain", event.target.id);
   });
 })();
